@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nómina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f7;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        .grid {
+            display: grid;
+            gap: 20px;
+        }
+        .grid-cols-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .space-y-2 {
+            margin-bottom: 16px;
+        }
+        label {
+            font-size: 0.9em;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #d7dbdd;
+            border-radius: 4px;
+        }
+        .switch-container {
+            display: flex;
+            align-items: center;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 34px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #d7dbdd;
+            transition: .4s;
+            border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            border-radius: 50%;
+            left: 4px;
+            bottom: 4px;
+            background-color: #fff;
+            transition: .4s;
+        }
+        input:checked + .slider {
+            background-color: #52be80;
+        }
+        input:checked + .slider:before {
+            transform: translateX(14px);
+        }
+        .button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin: 5px;
+        }
+        .button-outline {
+            background-color: #d7dbdd;
+            color: #333;
+        }
+        .button-primary {
+            background-color: #9b59b6;
+            color: #fff;
+        }
+        .card-header, .card-footer {
+            margin-bottom: 20px;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>Nómina</h1>
+                <p>Genere roles de pago mensuales</p>
+            </div>
+            <div class="card-content grid grid-cols-2 gap-4">
+                <div class="space-y-2">
+                    <label for="cargo">Cargo</label>
+                    <input id="cargo" type="text" placeholder="Ingrese el cargo">
+                </div>
+                <div class="space-y-2">
+                    <label for="aniosServicio">Años de Servicio</label>
+                    <input id="aniosServicio" type="number" placeholder="Ingrese los años de servicio">
+                </div>
+                <div class="space-y-2">
+                    <label for="sueldoBase">Sueldo Base</label>
+                    <input id="sueldoBase" type="number" placeholder="Ingrese el sueldo base">
+                </div>
+                <div class="space-y-2">
+                    <label for="comisionesSwitch">Comisiones</label>
+                    <div class="switch-container">
+                        <label class="switch">
+                            <input type="checkbox" id="comisionesSwitch">
+                            <span class="slider"></span>
+                        </label>
+                        <input id="comisiones" type="number" placeholder="Ingrese el monto de comisiones" style="display: none;">
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label for="transporteSwitch">Transporte</label>
+                    <div class="switch-container">
+                        <label class="switch">
+                            <input type="checkbox" id="transporteSwitch">
+                            <span class="slider"></span>
+                        </label>
+                        <input id="transporte" type="number" placeholder="Ingrese el monto de transporte" style="display: none;">
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label for="alimentacionSwitch">Alimentación</label>
+                    <div class="switch-container">
+                        <label class="switch">
+                            <input type="checkbox" id="alimentacionSwitch">
+                            <span class="slider"></span>
+                        </label>
+                        <input id="alimentacion" type="number" placeholder="Ingrese el monto de alimentación" style="display: none;">
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label for="horasSuplementarias">Horas Suplementarias</label>
+                    <input id="horasSuplementarias" type="number" placeholder="Ingrese las horas suplementarias">
+                </div>
+                <div class="space-y-2">
+                    <label for="horasComplementarias">Horas Complementarias</label>
+                    <input id="horasComplementarias" type="number" placeholder="Ingrese las horas complementarias">
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="space-y-2">
+                        <label for="decimoTercero">Décimo Tercero</label>
+                        <input id="decimoTercero" type="number" readonly>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="decimoCuarto">Décimo Cuarto</label>
+                        <input id="decimoCuarto" type="number" readonly>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="fondosReserva">Fondos de Reserva</label>
+                        <input id="fondosReserva" type="number" readonly>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label for="aportePersonal">Aporte Personal</label>
+                        <input id="aportePersonal" type="number" readonly>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="totalIngresos">Total Ingresos</label>
+                        <input id="totalIngresos" type="number" readonly>
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <label for="totalPagar">Total a Pagar</label>
+                    <input id="totalPagar" type="number" readonly>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button class="button button-outline" onclick="handlePrint()">Imprimir</button>
+                <button class="button button-primary" onclick="handleExport()">Exportar a PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('comisionesSwitch').addEventListener('change', function() {
+            const comisionesInput = document.getElementById('comisiones');
+            comisionesInput.style.display = this.checked ? 'block' : 'none';
+        });
+
+        document.getElementById('transporteSwitch').addEventListener('change', function() {
+            const transporteInput = document.getElementById('transporte');
+            transporteInput.style.display = this.checked ? 'block' : 'none';
+        });
+
+        document.getElementById('alimentacionSwitch').addEventListener('change', function() {
+            const alimentacionInput = document.getElementById('alimentacion');
+            alimentacionInput.style.display = this.checked ? 'block' : 'none';
+        });
+
+        function calculateValues() {
+            const sueldoBase = parseFloat(document.getElementById('sueldoBase').value) || 0;
+            const horasSuplementarias = parseInt(document.getElementById('horasSuplementarias').value) || 0;
+            const horasComplementarias = parseInt(document.getElementById('horasComplementarias').value) || 0;
+            const comisiones = parseFloat(document.getElementById('comisiones').value) || 0;
+            const transporte = parseFloat(document.getElementById('transporte').value) || 0;
+            const alimentacion = parseFloat(document.getElementById('alimentacion').value) || 0;
+            const aplicaComisiones = document.getElementById('comisionesSwitch').checked;
+            const aplicaTransporte = document.getElementById('transporteSwitch').checked;
+            const aplicaAlimentacion = document.getElementById('alimentacionSwitch').checked;
+
+            const decimoTercero = sueldoBase / 12;
+            const decimoCuarto = sueldoBase / 12;
+            const fondosReserva = sueldoBase * 0.0833;
+            const aportePersonal = sueldoBase * 0.0945;
+            const horasSuplementariasTotal = horasSuplementarias * (sueldoBase / 240);
+            const horasComplementariasTotal = horasComplementarias * (sueldoBase / 240) * 1.5;
+            const totalHorasExtras = horasSuplementariasTotal + horasComplementariasTotal;
+            const totalComisiones = aplicaComisiones ? comisiones : 0;
+            const totalTransporte = aplicaTransporte ? transporte : 0;
+            const totalAlimentacion = aplicaAlimentacion ? alimentacion : 0;
+
+            const totalIngresos = sueldoBase + totalHorasExtras + totalComisiones + totalTransporte + totalAlimentacion + decimoTercero + decimoCuarto + fondosReserva;
+            const totalPagar = totalIngresos - aportePersonal;
+
+            document.getElementById('decimoTercero').value = decimoTercero.toFixed(2);
+            document.getElementById('decimoCuarto').value = decimoCuarto.toFixed(2);
+            document.getElementById('fondosReserva').value = fondosReserva.toFixed(2);
+            document.getElementById('aportePersonal').value = aportePersonal.toFixed(2);
+            document.getElementById('totalIngresos').value = totalIngresos.toFixed(2);
+            document.getElementById('totalPagar').value = totalPagar.toFixed(2);
+        }
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', calculateValues);
+        });
+
+        function handlePrint() {
+            window.print();
+        }
+
+        function handleExport() {
+            alert('Funcionalidad de exportación a PDF no implementada.');
+        }
+    </script>
+</body>
+</html>
